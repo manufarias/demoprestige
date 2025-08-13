@@ -1,0 +1,795 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+  /* Variables CSS para colores principales */
+  .pagina-principal {
+    --color-primario: #2c5d4e;
+    --color-primario-claro: #2c5d4e30;
+    --color-blanco: #ffffff;
+    --color-texto-principal: rgb(64, 67, 91);
+    --color-texto-secundario: #666666;
+    --color-texto-oscuro: #333333;
+    --color-borde: #f0f0f0;
+    --color-fondo-faq: rgba(44, 125, 107, 0.08);
+    --color-fondo-pagina: #f8f8f8;
+    --color-enlace: #007bff;
+  }
+
+  /* Estilos base */
+  .pagina-principal {
+    font-family: sans-serif;
+    color: var(--color-texto-principal);
+    background-color: var(--color-fondo-pagina);
+  }
+
+  .contenedor-principal {
+    max-inline-size: 1200px;
+    margin-inline: auto;
+    background: var(--color-blanco);
+  }
+
+  .espaciado-seccion {
+    padding: 1rem;
+  }
+
+  /* Sección introducción */
+  .seccion-introduccion {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    padding-block-start: 2rem;
+  }
+
+  .logo-prestige {
+    width: 80px;
+    height: 80px;
+  }
+
+  .titulo-principal {
+    line-height: 1.1;
+    margin-block-end: 24px;
+    font-size: 1.75rem;
+  }
+
+  .descripcion-principal {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    max-inline-size: 90ch;
+  }
+
+  /* Títulos de sección */
+  .titulo-seccion {
+    line-height: 1.1;
+    margin-block: 24px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .titulo-seccion-izquierda {
+    line-height: 1.1;
+    margin-block-end: 24px;
+    text-align: center;
+  }
+
+  /* Sistema de grilla */
+  .grilla-beneficios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 500px));
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .grilla-especialistas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 280px));
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .grilla-especialistas-pequena {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 580px));
+    gap: 16px;
+  }
+
+  /* Tarjetas de beneficios */
+  .tarjeta-beneficio {
+    outline: 1px solid var(--color-primario-claro);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .figura-centrada {
+    display: block;
+    text-align: center;
+  }
+
+  .icono-numero {
+    width: 72px;
+    aspect-ratio: 1;
+  }
+
+  /* Tarjetas de especialistas */
+  .tarjeta-especialista {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-blanco);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .imagen-especialista {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 1px solid var(--color-borde);
+  }
+
+  .contenido-tarjeta {
+    padding: 16px;
+    text-align: center;
+  }
+
+  .nombre-especialista {
+    margin: 0 0 4px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--color-texto-oscuro);
+    line-height: 1.2;
+  }
+
+  .especialidad {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--color-texto-secundario);
+  }
+
+  /* Títulos de especialidades */
+  .titulo-especialidad {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 16px;
+    font-size: 1.5rem;
+  }
+
+  /* FAQ */
+  .contenedor-faq {
+    max-inline-size: 1000px;
+    margin-inline: auto;
+  }
+
+  .item-faq {
+    border: 1px solid var(--color-primario-claro);
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .pregunta-faq {
+    background-color: var(--color-fondo-faq);
+    padding: 15px;
+    cursor: pointer;
+    color: rgb(44, 94, 79);
+    border-radius: 5px;
+  }
+
+  .item-faq[open] .pregunta-faq {
+    border-bottom: 1px solid var(--color-primario-claro);
+    border-radius: 5px 5px 0 0;
+  }
+
+  .contenido-respuesta {
+    padding: 15px;
+    background-color: var(--color-blanco);
+  }
+
+  .contenido-respuesta p {
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+  }
+
+  .contenido-respuesta ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+
+  .contenido-respuesta li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .contenido-respuesta a {
+    color: var(--color-enlace);
+    text-decoration: none;
+  }
+
+  /* Media queries */
+  @media (max-width: 1200px) {
+    .grilla-especialistas-pequena {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+
+    .grilla-especialistas-pequena .titulo-especialidad,
+    .grilla-especialistas-pequena h3 {
+      grid-column: 1 / -1;
+      text-align: left;
+      margin-bottom: 16px;
+    }
+  }
+</style>
+
+<main class="pagina-principal">
+  <!-- Introducción -->
+  <section class="contenedor-principal seccion-introduccion espaciado-seccion">
+    <h2 class="titulo-principal">Experiencia Prestige</h2>
+    <p class="descripcion-principal">
+      Descubrí un espacio con beneficios exclusivos y respaldado por nuestra
+      excelencia médica. Experimentá una atención de primer nivel que combina el
+      máximo confort con el legado de calidad que nos caracteriza.
+    </p>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="contenedor-principal espaciado-seccion">
+    <h2 class="titulo-seccion">Beneficios Prestige</h2>
+    <div class="grilla-beneficios">
+      <div class="tarjeta-beneficio">
+        <figure class="figura-centrada">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            style="width: 72px"
+          >
+            <path
+              fill="#2c5d4e"
+              d="M128 128l0 16 192 0 0-16 0-57.8-96-36-96 36 0 57.8zM96 160l0-32 0-57.8c0-13.3 8.3-25.3 20.8-30l96-36c7.2-2.7 15.2-2.7 22.5 0l96 36c12.5 4.7 20.8 16.6 20.8 30l0 57.8 0 32 0 16c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-16zm224 16l-192 0c0 53 43 96 96 96s96-43 96-96zM119 359.1C68.7 376.5 32.5 424 32 480l384 0c-.5-56-36.7-103.5-86.9-120.9L259 433.6c-19 20.1-51 20.1-69.9 0L119 359.1zm22.4-22.9l71 75.5c6.3 6.7 17 6.7 23.3 0l71-75.5c7.6-8.1 18.9-11.9 29.4-8.5C401 348.6 448 409.4 448 481.3c0 17-13.8 30.7-30.7 30.7L30.7 512C13.8 512 0 498.2 0 481.3c0-71.9 47-132.7 111.9-153.6c10.5-3.4 21.8 .4 29.4 8.5zM216 48l16 0c4.4 0 8 3.6 8 8l0 16 16 0c4.4 0 8 3.6 8 8l0 16c0 4.4-3.6 8-8 8l-16 0 0 16c0 4.4-3.6 8-8 8l-16 0c-4.4 0-8-3.6-8-8l0-16-16 0c-4.4 0-8-3.6-8-8l0-16c0-4.4 3.6-8 8-8l16 0 0-16c0-4.4 3.6-8 8-8z"
+            ></path>
+          </svg>
+        </figure>
+        <h3>Acceso prioritario a turnos médicos</h3>
+        <p>Conseguí citas más fácilmente y con fechas más cercanas</p>
+      </div>
+
+      <div class="tarjeta-beneficio">
+        <figure class="figura-centrada">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            style="width: 72px"
+          >
+            <path
+              fill="#2c5d4e"
+              d="M128 16c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 48L64 64C28.7 64 0 92.7 0 128l0 32 0 32L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-32 0-32c0-35.3-28.7-64-64-64l-32 0 0-48c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 48L128 64l0-48zM32 192l384 0 0 256c0 17.7-14.3 32-32 32L64 480c-17.7 0-32-14.3-32-32l0-256zM64 96l320 0c17.7 0 32 14.3 32 32l0 32L32 160l0-32c0-17.7 14.3-32 32-32zM331.3 283.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L208 361.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l112-112z"
+            ></path>
+          </svg>
+        </figure>
+        <h3>Prioridad en estudios diagnósticos</h3>
+        <p>
+          Tenés preferencia para turnos de radiografías, ecografías, tomografías
+          y análisis de laboratorio
+        </p>
+      </div>
+
+      <div class="tarjeta-beneficio">
+        <figure class="figura-centrada">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            style="width: 72px"
+          >
+            <path
+              fill="#2c5d4e"
+              d="M224 32a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm48 288a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zm32-45.3l0-34.7 1.2 0 93.6 0c5.8 0 11.5 .3 17.2 1l0 33.3c-23.1 6.9-40 28.3-40 53.7l0 24c0 8.8 7.2 16 16 16l16 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l0-8c0-13.3 10.7-24 24-24s24 10.7 24 24l0 8c-8.8 0-16 7.2-16 16s7.2 16 16 16l16 0c8.8 0 16-7.2 16-16l0-24c0-25.4-16.9-46.8-40-53.7l0-25.8c55.6 20 95.5 73 96 135.5L32 480c.5-68.2 48.2-125.3 112-140.2l0 30.9c-18.6 6.6-32 24.4-32 45.3c0 26.5 21.5 48 48 48s48-21.5 48-48c0-20.9-13.4-38.7-32-45.3zm1.2-66.7C79.3 304 0 383.3 0 481.2c0 17 13.8 30.8 30.8 30.8l386.4 0c17 0 30.8-13.8 30.8-30.8C448 383.3 368.7 304 270.8 304l-93.6 0z"
+            ></path>
+          </svg>
+        </figure>
+        <h3>Atención médica premium</h3>
+        <p>Accedé a profesionales y servicios de la más alta calidad</p>
+      </div>
+
+      <div class="tarjeta-beneficio">
+        <figure class="figura-centrada">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            style="width: 72px"
+          >
+            <path
+              fill="#2c5d4e"
+              d="M208 64c-8.8 0-16 7.2-16 16s7.2 16 16 16l32 0 0 48.6C123.8 152.8 32 249.7 32 368l0 16 32 0 0-16c0-106 86-192 192-192s192 86 192 192l0 16 32 0 0-16c0-118.3-91.8-215.2-208-223.4L272 96l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0-48 0zM16 416c-8.8 0-16 7.2-16 16s7.2 16 16 16l480 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L16 416z"
+            ></path>
+          </svg>
+        </figure>
+        <h3>Sala de espera exclusiva</h3>
+        <p>Disfrutá de un ambiente más cómodo y privado mientras esperás</p>
+      </div>
+
+      <div class="tarjeta-beneficio">
+        <figure class="figura-centrada">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            style="width: 72px"
+          >
+            <path
+              fill="#2c5d4e"
+              d="M298.6 4c-6-5.3-15.1-5.3-21.2 0L5.4 244c-6.6 5.8-7.3 16-1.4 22.6s16 7.3 22.6 1.4L64 235l0 197c0 44.2 35.8 80 80 80l288 0c44.2 0 80-35.8 80-80l0-197 37.4 33c6.6 5.8 16.7 5.2 22.6-1.4s5.2-16.7-1.4-22.6L298.6 4zM96 432l0-225.3L288 37.3 480 206.7 480 432c0 26.5-21.5 48-48 48l-64 0 0-160c0-17.7-14.3-32-32-32l-96 0c-17.7 0-32 14.3-32 32l0 160-64 0c-26.5 0-48-21.5-48-48zm144 48l0-160 96 0 0 160-96 0z"
+            ></path>
+          </svg>
+        </figure>
+        <h3>Consultas ambulatorias</h3>
+        <p>
+          Recibí atención médica en un entorno más relajado y cercano, fuera del
+          ambiente hospitalario tradicional
+        </p>
+      </div>
+
+      <div class="tarjeta-beneficio">
+        <figure class="figura-centrada">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            style="width: 72px"
+          >
+            <path
+              fill="#2c5d4e"
+              d="M113.6 98.2L85.3 192.6c3.5-.4 7.1-.6 10.7-.6l320 0c3.6 0 7.2 .2 10.7 .6L398.4 98.2c-6.1-20.3-24.8-34.2-46-34.2L159.6 64c-21.2 0-39.9 13.9-46 34.2zM74.3 227.8C49.6 236.7 32 260.3 32 288l0 96 448 0 0-96c0-27.7-17.6-51.3-42.3-60.2l-.5 .1-.1-.3c-6.6-2.3-13.8-3.6-21.2-3.6L96 224c-7.4 0-14.5 1.3-21.2 3.6l-.1 .3-.5-.1zm-26-23.1l.4-1.3L83 89c10.2-33.8 41.3-57 76.6-57l192.8 0c35.3 0 66.5 23.2 76.6 57l34.3 114.4 .4 1.3C492.6 221.2 512 252.3 512 288l0 96 0 16 0 16 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48L32 416l0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-16 0-16 0-96c0-35.7 19.4-66.8 48.3-83.3zM104 272a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm280 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"
+            ></path>
+          </svg>
+        </figure>
+        <h3>Estacionamiento gratuito</h3>
+        <p>Olvidate de buscar lugar y pagar por estacionar</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas Frecuentes -->
+  <section class="contenedor-principal espaciado-seccion">
+    <h2 class="titulo-seccion-izquierda">
+      Como funciona nuestro servicio exclusivo
+    </h2>
+
+    <div class="contenedor-faq">
+      <details class="item-faq">
+        <summary class="pregunta-faq">¿Qué es Espacio Prestige?</summary>
+        <div class="contenido-respuesta">
+          <p>
+            Espacio Prestige es un servicio de atención personalizada que
+            fusiona nuestro prestigio médico con beneficios exclusivos para tu
+            cuidado.
+          </p>
+        </div>
+      </details>
+
+      <details class="item-faq">
+        <summary class="pregunta-faq">
+          ¿Por qué elegir Espacio Prestige?
+        </summary>
+        <div class="contenido-respuesta">
+          <p>
+            Como paciente de este servicio, tendrás los siguientes beneficios:
+          </p>
+          <ul>
+            <li>Staff médico de primer nivel.</li>
+            <li>Atención personalizada fuera del ámbito hospitalario.</li>
+            <li>Accesibilidad en los turnos para diversas especialidades.</li>
+            <li>Sala de espera diferencial.</li>
+            <li>
+              Historia clínica integrada a la del Hospital Universitario
+              Austral.
+            </li>
+            <li>
+              Servicio de conserjería para la coordinación de tus estudios.
+            </li>
+            <li>Estacionamiento sin cargo.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="item-faq">
+        <summary class="pregunta-faq">¿Cómo accedo a Espacio Prestige?</summary>
+        <div class="contenido-respuesta">
+          <p>
+            En nuestro sitio web encontrás el listado de especialidades y las
+            opciones de turno. Además, podés realizar tu reserva de manera
+            rápida y sencilla.
+          </p>
+        </div>
+      </details>
+
+      <details class="item-faq">
+        <summary class="pregunta-faq">
+          ¿Mi plan de medicina prepaga cubre esta atención?
+        </summary>
+        <div class="contenido-respuesta">
+          <p>
+            Por el momento es un servicio completamente particular, y
+            actualmente no tiene convenio directo con ninguna prepaga.
+          </p>
+        </div>
+      </details>
+
+      <details class="item-faq">
+        <summary class="pregunta-faq">
+          ¿Cómo se realiza el pago del turno?
+        </summary>
+        <div class="contenido-respuesta">
+          <p>
+            El pago se efectúa a través de Mercado Pago al momento de reservar
+            el turno. Una vez completado, el turno quedará confirmado y podrás
+            descargar la factura correspondiente. Además, recibirás un correo
+            electrónico con toda la información necesaria para tu cita médica.
+          </p>
+        </div>
+      </details>
+
+      <details class="item-faq">
+        <summary class="pregunta-faq">
+          ¿Qué sucede si necesito cancelar mi turno?
+        </summary>
+        <div class="contenido-respuesta">
+          <p>
+            Si necesitás cancelar tu turno, podrás hacerlo con más de 48 horas
+            de antelación para recibir un reembolso completo o reprogramarlo.
+            Ingresá al
+            <a href="http://vita.hospitalaustral.edu.ar/TurnosPrestige/WebApp"
+              >Portal Prestige</a
+            >: 'Solicitar turno' > 'Mis turnos'.<br />
+            Lamentablemente, no será posible realizar reembolsos dentro de las
+            48 horas previas al turno.
+          </p>
+        </div>
+      </details>
+
+      <details class="item-faq">
+        <summary class="pregunta-faq">¿Cuál es el medio de contacto?</summary>
+        <div class="contenido-respuesta">
+          <p>
+            Ante cualquier duda o consulta que tengas, podés escribirnos por
+            mail a
+            <a href="mailto:espacioprestige@cas.austral.edu.ar"
+              >espacioprestige@cas.austral.edu.ar.</a
+            >
+          </p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Staff y especialistas -->
+  <section class="contenedor-principal espaciado-seccion">
+    <h2 class="titulo-seccion-izquierda">Nuestros Especialistas</h2>
+
+    <div class="contenedor-especialista">
+      <h3 class="titulo-especialidad">Cardiología</h3>
+      <div class="grilla-especialistas">
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/bonorino-jose-2-e1705673661330.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Bonorino, José María"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista">Bonorino, José María</strong>
+            <p class="especialidad">Cardiología</p>
+          </div>
+        </div>
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2024/01/brenzoni-maria-noelia-e1711371441996.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Brenzoni, Noelia"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista">Brenzoni, Noelia</strong>
+            <p class="especialidad">Cardiología</p>
+          </div>
+        </div>
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2023/11/martin-napoli-maria-victoria-e1711371563931.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Martin Nápoli, Victoria"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista">Martin Nápoli, Victoria</strong>
+            <p class="especialidad">Cardiología</p>
+          </div>
+        </div>
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2022/12/ortuno-campos-eduardo-scaled-e1704394396189.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Ortuño Campos, Eduardo N."
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista"
+              >Ortuño Campos, Eduardo N.</strong
+            >
+            <p class="especialidad">Cardiología</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grilla-especialistas-pequena">
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Cirugía de Cabeza y Cuello</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/Voogd-Ana-2-scaled-e1661512626894.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Voogd, Ana Inés"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Voogd, Ana Inés</strong>
+              <p class="especialidad">
+                Cirugía de Cabeza y Cuello y Oncológica de Partes Blandas
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Clínica Médica</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2023/11/coronel-juan-matias-e1709667704270.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Coronel, Matías"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Coronel, Matías</strong>
+              <p class="especialidad">Clínica Médica</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grilla-especialistas-pequena">
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Coloproctología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/105.png&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Rosato, Guillermo"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Rosato, Guillermo</strong>
+              <p class="especialidad">Coloproctología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Cuidados Paliativos</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2015/01/Matias-Najun-scaled.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Najún, Matías"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Najún, Matías</strong>
+              <p class="especialidad">Cuidados Paliativos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenedor-especialista">
+      <h3 class="titulo-especialidad">Dermatología</h3>
+      <div class="grilla-especialistas">
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/37.png&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de De Diego, María Clara"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista">De Diego, María Clara</strong>
+            <p class="especialidad">Dermatología</p>
+          </div>
+        </div>
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2018/12/img-2509-scaled-e1704803332912.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Gagliardi, Marina"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista">Gagliardi, Marina</strong>
+            <p class="especialidad">Dermatología</p>
+          </div>
+        </div>
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/rebora-ignacio-e1705689254802.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Rébora, Ignacio"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista">Rébora, Ignacio</strong>
+            <p class="especialidad">Dermatología</p>
+          </div>
+        </div>
+        <div class="tarjeta-especialista">
+          <img
+            src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/158.png&amp;width=240&amp;height=240&amp;cropratio=240:240"
+            alt="Foto de Stringa, Matías Federico"
+            class="imagen-especialista"
+          />
+          <div class="contenido-tarjeta">
+            <strong class="nombre-especialista"
+              >Stringa, Matías Federico</strong
+            >
+            <p class="especialidad">Dermatología</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grilla-especialistas-pequena">
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Endocrinología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/img-2932-e1705079423951.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Cavallo, Andrea Camila"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista"
+                >Cavallo, Andrea Camila</strong
+              >
+              <p class="especialidad">Endocrinología</p>
+            </div>
+          </div>
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2022/08/Guerra-Jorgelina-scaled-e1659441863268.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Guerra, Jorgelina"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Guerra, Jorgelina</strong>
+              <p class="especialidad">Endocrinología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Flebología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2019/10/159.png&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Cronshey, Andrés"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Cronshey, Andrés</strong>
+              <p class="especialidad">Flebología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grilla-especialistas-pequena">
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Neurología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2024/01/lazaro-luciana-e1752605272896.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Lázaro, Luciana Grimanesa"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista"
+                >Lázaro, Luciana Grimanesa</strong
+              >
+              <p class="especialidad">Neurología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Oncología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2015/01/vanni-maria-yoana-scaled-e1706699739524.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Vanni, Yoana"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Vanni, Yoana</strong>
+              <p class="especialidad">Oncología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grilla-especialistas-pequena">
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Oftalmología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/75.png&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Lupinacci, Anahí"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Lupinacci, Anahí</strong>
+              <p class="especialidad">Oftalmología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Reumatología</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/76-1.png&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Maid, Pablo"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Maid, Pablo</strong>
+              <p class="especialidad">Reumatología</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grilla-especialistas-pequena">
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Traumatología Oncológica</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2014/12/galli-scaled-e1739906085952.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Galli Serra, Marcos"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Galli Serra, Marcos</strong>
+              <p class="especialidad">Traumatología Oncológica</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contenedor-especialista">
+        <h3 class="titulo-especialidad">Articulación Temporomandibular</h3>
+        <div class="grilla-especialistas">
+          <div class="tarjeta-especialista">
+            <img
+              src="https://www.hospitalaustral.edu.ar/wp-content/themes/hua/common/image.php?image=https://www.hospitalaustral.edu.ar/wp-content/uploads/2019/01/Diego-Pien-scaled.jpg&amp;width=240&amp;height=240&amp;cropratio=240:240"
+              alt="Foto de Pien, Diego Martín"
+              class="imagen-especialista"
+            />
+            <div class="contenido-tarjeta">
+              <strong class="nombre-especialista">Pien, Diego Martín</strong>
+              <p class="especialidad">Articulación Temporomandibular</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
